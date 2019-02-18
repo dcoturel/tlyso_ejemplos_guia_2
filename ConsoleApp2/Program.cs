@@ -20,6 +20,9 @@ namespace ConsoleApp2
                 case 3:
                     ejercicio3();
                     break;
+                case 4:
+                    ejercicio4();
+                    break;
             }
         }
 
@@ -143,6 +146,64 @@ namespace ConsoleApp2
 
                 fila = fila + 1;
             } while (fila < kiFilas);
+
+            fila = 0;
+            do
+            {
+                columna = 0;
+                linea = "";
+                do
+                {
+                    linea = linea + "\t" + matriz[fila, columna];
+                    columna = columna + 1;
+                } while (columna < kiColumnas);
+                Console.WriteLine(linea);
+                fila = fila + 1;
+            } while (fila < kiFilas);
+
+            Console.WriteLine("Press any key");
+            Console.ReadKey();
+        }
+
+        private static void ejercicio4()
+        {
+            const int kiFilas = 20;
+            const int kiColumnas = 5;
+            int[,] matriz = new int[kiFilas, kiColumnas];
+            int fila = 0;
+            int columna = 0;
+            String linea = "";
+            int contador = 101;
+
+            do
+            {
+
+                if (columna % 2 == 0)
+                {
+                    fila = 0;
+                    do
+                    {
+
+                        contador = contador - 1;
+                        matriz[fila, columna] = contador;
+                        fila = fila + 1;
+                    } while (fila < kiFilas);
+                }
+                else
+                {
+                    fila = kiFilas - 1;
+                    do
+                    {
+
+                        contador = contador - 1;
+                        matriz[fila, columna] = contador;
+                        fila = fila - 1;
+                    } while (fila >= 0);
+
+                }
+
+                columna = columna + 1;
+            } while (columna < kiColumnas);
 
             fila = 0;
             do
