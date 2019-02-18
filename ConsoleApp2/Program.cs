@@ -23,6 +23,9 @@ namespace ConsoleApp2
                 case 4:
                     ejercicio4();
                     break;
+                case 5:
+                    ejercicio5();
+                    break;
             }
         }
 
@@ -223,6 +226,49 @@ namespace ConsoleApp2
             Console.ReadKey();
         }
 
+        private static void ejercicio5()
+        {
+            const int kiFilas = 20;
+            const int kiColumnas = 5;
+            int[,] matriz = new int[kiFilas, kiColumnas];
+            int fila = 0;
+            int columna = 0;
+            String linea = "";
+            int contador = 0;
 
+            do
+            {
+
+                    columna = kiColumnas - 1;
+                    do
+                    {
+
+                        contador = contador + 1;
+                        matriz[fila, columna] = contador;
+                        columna = columna - 1;
+                    } while (columna >= 0);
+
+                fila = fila + 1;
+            } while (fila < kiFilas);
+
+            fila = 0;
+            do
+            {
+                columna = 0;
+                linea = "";
+                do
+                {
+                    linea = linea + "\t" + matriz[fila, columna];
+                    columna = columna + 1;
+                } while (columna < kiColumnas);
+                Console.WriteLine(linea);
+                fila = fila + 1;
+            } while (fila < kiFilas);
+
+            Console.WriteLine("Press any key");
+            Console.ReadKey();
+
+        }
     }
+
 }
