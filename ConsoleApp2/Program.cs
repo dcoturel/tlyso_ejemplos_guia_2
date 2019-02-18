@@ -17,6 +17,9 @@ namespace ConsoleApp2
                 case 2:
                     ejercicio2();
                     break;
+                case 3:
+                    ejercicio3();
+                    break;
             }
         }
 
@@ -80,6 +83,64 @@ namespace ConsoleApp2
                     matriz[fila, columna] = contador;
                     columna = columna + 1;
                 } while (columna < kiColumnas);
+                fila = fila + 1;
+            } while (fila < kiFilas);
+
+            fila = 0;
+            do
+            {
+                columna = 0;
+                linea = "";
+                do
+                {
+                    linea = linea + "\t" + matriz[fila, columna];
+                    columna = columna + 1;
+                } while (columna < kiColumnas);
+                Console.WriteLine(linea);
+                fila = fila + 1;
+            } while (fila < kiFilas);
+
+            Console.WriteLine("Press any key");
+            Console.ReadKey();
+        }
+
+        private static void ejercicio3()
+        {
+            const int kiFilas = 20;
+            const int kiColumnas = 5;
+            int[,] matriz = new int[kiFilas, kiColumnas];
+            int fila = 0;
+            int columna = 0;
+            String linea = "";
+            int contador = 0;
+
+            do
+            {
+
+                if (fila % 2 == 0)
+                {
+                    columna = 0;
+                    do
+                    {
+
+                        contador = contador + 1;
+                        matriz[fila, columna] = contador;
+                        columna = columna + 1;
+                    } while (columna < kiColumnas);
+                }
+                else
+                {
+                    columna = kiColumnas -1;
+                    do
+                    {
+
+                        contador = contador + 1;
+                        matriz[fila, columna] = contador;
+                        columna = columna - 1;
+                    } while (columna >= 0);
+
+                }
+
                 fila = fila + 1;
             } while (fila < kiFilas);
 
