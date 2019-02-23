@@ -26,6 +26,9 @@ namespace ConsoleApp2
                 case 5:
                     ejercicio5();
                     break;
+                case 6:
+                    ejercicio6();
+                    break;
             }
         }
 
@@ -268,6 +271,103 @@ namespace ConsoleApp2
             Console.WriteLine("Press any key");
             Console.ReadKey();
 
+        }
+
+        private static void ejercicio6()
+        {
+            const int filas = 100;
+            String nombreIngresar = "";
+            String direccionIngresar = "";
+            String telefonoIngresar = "";
+            String[] nombres = new String[filas];
+            String[] direcciones = new string[filas];
+            String[] telefonos = new String[filas];
+            String Continuar = "S";
+            String nombreBuscar = "";
+            int posicion = 0;
+
+            do
+            {
+                do
+                {
+                    Console.WriteLine("Ingrese un nombre de cliente");
+                    nombreIngresar = Console.ReadLine();
+                    if (nombreIngresar.Equals("")) {
+                        Console.WriteLine("Debe ingresar un valor");
+                    }
+                } while (nombreIngresar.Equals(""));
+
+                do
+                {
+                    Console.WriteLine("Ingrese una direccion");
+                    direccionIngresar = Console.ReadLine();
+                    if (direccionIngresar.Equals(""))
+                    {
+                        Console.WriteLine("Debe ingresar un valor");
+                    }
+                } while (direccionIngresar.Equals(""));
+
+
+                do
+                {
+                    Console.WriteLine("Ingrese un telefono");
+                    telefonoIngresar = Console.ReadLine();
+                    if (telefonoIngresar.Equals(""))
+                    {
+                        Console.WriteLine("Debe ingresar un valor");
+                    }
+                } while (telefonoIngresar.Equals(""));
+
+                nombres[posicion] = nombreIngresar;
+                telefonos[posicion] = telefonoIngresar;
+                direcciones[posicion] = direccionIngresar;
+                nombreIngresar = "";
+                telefonoIngresar = "";
+                direccionIngresar = "";
+                posicion = posicion + 1;
+
+                do
+                {
+                    Console.WriteLine("¿Desea continuar cargando clientes? S/N");
+                    Continuar = Console.ReadLine().ToUpper();
+                    if (!Continuar.Equals("S") && !Continuar.Equals("N"))
+                    {
+                        Console.WriteLine("Debe ingresar S o N");
+                    }
+                } while (!Continuar.Equals("S") && !Continuar.Equals("N"));
+
+            } while (Continuar.Equals("S") && posicion < filas);
+
+            do
+            {
+                Console.WriteLine("Ingrese un nombre de cliente");
+                nombreBuscar = Console.ReadLine();
+                if (nombreBuscar.Equals(""))
+                {
+                    Console.WriteLine("Debe ingresar un valor");
+                }
+            } while (nombreBuscar.Equals(""));
+
+            posicion = 0;
+
+            do
+            {
+                posicion = posicion + 1;
+            } while (!nombres[posicion].Equals(nombreBuscar)&&posicion<filas-1);
+
+            if (nombres[posicion].Equals(nombreBuscar))
+            {
+                Console.WriteLine("Nombre: " + nombres[posicion]);
+                Console.WriteLine("Direccion: " + direcciones[posicion]);
+                Console.WriteLine("Telefono: " + telefonos[posicion]);
+            }
+            else
+            {
+                Console.WriteLine("No se registra cliente con el nombre ingresado");
+            }
+
+            Console.WriteLine("Press any key");
+            Console.Read();
         }
     }
 
