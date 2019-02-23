@@ -29,6 +29,9 @@ namespace ConsoleApp2
                 case 6:
                     ejercicio6();
                     break;
+                case 7:
+                    ejercicio7();
+                    break;
             }
         }
 
@@ -365,6 +368,70 @@ namespace ConsoleApp2
             {
                 Console.WriteLine("No se registra cliente con el nombre ingresado");
             }
+
+            Console.WriteLine("Press any key");
+            Console.Read();
+        }
+
+        private static void ejercicio7()
+        {
+            const int filas = 100;
+            const int notaAprobada = 4;
+            String[] alumnos = new String[filas];
+            int[] notas = new int[filas];
+            String alumnoIngresar = "";
+            int notaIngresar = 0;
+            int posicion = 0;
+            String Continuar = "S";
+
+            do
+            {
+                do
+                {
+                    Console.WriteLine("Ingrese un nombre de alumno");
+                    alumnoIngresar = Console.ReadLine();
+                    if (alumnoIngresar.Equals(""))
+                    {
+                        Console.WriteLine("Debe ingresar un valor");
+                    }
+                } while (alumnoIngresar.Equals(""));
+
+                do
+                {
+                    Console.WriteLine("Ingrese una nota");
+                    notaIngresar = Convert.ToInt32(Console.ReadLine());
+                    if (notaIngresar<0||notaIngresar>10)
+                    {
+                        Console.WriteLine("Debe ingresar un valor entre 0 y 10");
+                    }
+                } while (notaIngresar < 0 || notaIngresar > 10);
+
+                alumnos[posicion] = alumnoIngresar;
+                notas[posicion] = notaIngresar;
+
+                do
+                {
+                    Console.WriteLine("¿Desea continuar cargando notas? S/N");
+                    Continuar = Console.ReadLine().ToUpper();
+                    if (!Continuar.Equals("S") && !Continuar.Equals("N"))
+                    {
+                        Console.WriteLine("Debe ingresar S o N");
+                    }
+                } while (!Continuar.Equals("S") && !Continuar.Equals("N"));
+
+                posicion = posicion + 1;
+            } while (Continuar.Equals("S") && posicion < filas);
+
+            posicion = 0;
+            Console.WriteLine("Alumnos aprobados:");
+            do
+            {
+                if (notas[posicion]>notaAprobada)
+                {
+                    Console.WriteLine(alumnos[posicion]);
+                }
+                posicion = posicion + 1;
+            } while (posicion < filas);
 
             Console.WriteLine("Press any key");
             Console.Read();
