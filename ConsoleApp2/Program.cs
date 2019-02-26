@@ -32,6 +32,9 @@ namespace ConsoleApp2
                 case 7:
                     ejercicio7();
                     break;
+                case 8:
+                    ejercicio8();
+                    break;
             }
         }
 
@@ -432,6 +435,130 @@ namespace ConsoleApp2
                 }
                 posicion = posicion + 1;
             } while (posicion < filas);
+
+            Console.WriteLine("Press any key");
+            Console.Read();
+        }
+
+        private static void ejercicio8()
+        {
+            const int filas = 100;
+            const int columnas = 2;
+            const int colCodigo = 0;
+            const int colRazonSocial = 1;
+
+            String[, ] clientes = new String[filas, columnas];
+            double[] ventas = new double[filas];
+
+            String[] clienteMasVenta = new string[columnas];
+            double ventaMaxima = 0;
+
+            String[] clienteMenosVenta = new string[columnas];
+            double ventaMinima = 0;
+
+            double promedioVenta = 0;
+
+            String codigoIngresar = "";
+            String razonSocialIngresar = "";
+            double ventaIngresar = 0;
+
+            int posicion = 0;
+            String Continuar = "S";
+
+            do
+            {
+                codigoIngresar = "";
+                razonSocialIngresar = "";
+                ventaIngresar = 0;
+
+                do
+                {
+                    Console.WriteLine("Ingrese un codigo de cliente");
+                    codigoIngresar = Console.ReadLine();
+                    if (codigoIngresar.Equals(""))
+                    {
+                        Console.WriteLine("Debe ingresar un valor");
+                    }
+                } while (codigoIngresar.Equals(""));
+
+                do
+                {
+                    Console.WriteLine("Ingrese una razon social");
+                    razonSocialIngresar = Console.ReadLine();
+                    if (razonSocialIngresar.Equals(""))
+                    {
+                        Console.WriteLine("Debe ingresar un valor");
+                    }
+                } while (razonSocialIngresar.Equals(""));
+
+                do
+                {
+                    Console.WriteLine("Ingrese las ventas del periodo");
+                    ventaIngresar = Convert.ToDouble(Console.ReadLine());
+                    if (ventaIngresar.Equals(""))
+                    {
+                        Console.WriteLine("Debe ingresar un valor");
+                    }
+                } while (ventaIngresar.Equals(""));
+
+                clientes[posicion, colCodigo] = codigoIngresar;
+                clientes[posicion, colRazonSocial] = razonSocialIngresar;
+                ventas[posicion] = ventaIngresar;
+
+                do
+                {
+                    Console.WriteLine("¿Desea continuar cargando notas? S/N");
+                    Continuar = Console.ReadLine().ToUpper();
+                    if (!Continuar.Equals("S") && !Continuar.Equals("N"))
+                    {
+                        Console.WriteLine("Debe ingresar S o N");
+                    }
+                } while (!Continuar.Equals("S") && !Continuar.Equals("N"));
+
+                posicion = posicion + 1;
+            } while (Continuar.Equals("S") && posicion < filas);
+
+            posicion = 0;
+
+            do
+            {
+                if (posicion == 0)
+                {
+                    ventaMaxima = ventas[posicion];
+                    clienteMasVenta[colCodigo] = clientes[posicion, colCodigo];
+                    clienteMasVenta[colRazonSocial] = clientes[posicion, colRazonSocial];
+
+                    ventaMinima = ventas[posicion];
+                    clienteMenosVenta[colCodigo] = clientes[posicion, colCodigo];
+                    clienteMenosVenta[colRazonSocial] = clientes[posicion, colRazonSocial];
+
+                }
+                else
+                {
+                    if (ventas[posicion]>ventaMaxima)
+                    {
+                        ventaMaxima = ventas[posicion];
+                        clienteMasVenta[colCodigo] = clientes[posicion, colCodigo];
+                        clienteMasVenta[colRazonSocial] = clientes[posicion, colRazonSocial];
+                    }
+                    if (ventas[posicion] < ventaMinima)
+                    {
+                        ventaMinima = ventas[posicion];
+                        clienteMenosVenta[colCodigo] = clientes[posicion, colCodigo];
+                        clienteMenosVenta[colRazonSocial] = clientes[posicion, colRazonSocial];
+                    }
+                }
+                promedioVenta = promedioVenta + ventas[posicion];
+                posicion = posicion + 1;
+            } while (posicion < filas - 1 && clientes[posicion, colCodigo] != null);
+
+            Console.WriteLine("Cliente con mas ventas: " + clienteMasVenta[colCodigo] + " - " + clienteMasVenta[colRazonSocial]);
+            Console.WriteLine("Ventas: " + ventaMaxima);
+
+            Console.WriteLine("Cliente con menos ventas: " + clienteMenosVenta[colCodigo] + " - " + clienteMenosVenta[colRazonSocial]);
+            Console.WriteLine("Ventas: " + ventaMinima);
+
+            Console.WriteLine("Venta promedio: " + promedioVenta / posicion);
 
             Console.WriteLine("Press any key");
             Console.Read();
