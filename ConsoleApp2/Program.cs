@@ -35,6 +35,9 @@ namespace ConsoleApp2
                 case 8:
                     ejercicio8();
                     break;
+                case 9:
+                    ejercicio9();
+                    break;
             }
         }
 
@@ -562,6 +565,69 @@ namespace ConsoleApp2
 
             Console.WriteLine("Press any key");
             Console.Read();
+        }
+
+        private static void ejercicio9()
+        {
+            const int filas = 5;
+            String[] palabras = new String[filas];
+            String palabraIngresar = "";
+            String auxiliar = "";
+            int posicion = 0;
+            int contPasadas = 0;
+
+            do
+            {
+                do
+                {
+                    Console.WriteLine("Ingrese una palabra");
+                    palabraIngresar = Console.ReadLine();
+                    if (palabraIngresar.Equals(""))
+                    {
+                        Console.WriteLine("Debe ingresar un valor");
+                    }
+                } while (palabraIngresar.Equals(""));
+                palabras[posicion] = palabraIngresar;
+                posicion = posicion + 1;
+            } while (posicion < filas);
+
+            posicion = 0;
+
+            do
+            {
+                Console.WriteLine("# " + posicion + ": " + palabras[posicion]);
+                posicion = posicion + 1;
+            } while (posicion < filas);
+
+            posicion = 0;
+
+            do
+            {
+                posicion = 0;
+                do
+                {
+                    if (String.Compare(palabras[posicion], palabras[posicion + 1], StringComparison.Ordinal) > 0)
+                    {
+                        auxiliar = palabras[posicion];
+                        palabras[posicion] = palabras[posicion + 1];
+                        palabras[posicion + 1] = auxiliar;
+                    }
+                    posicion = posicion + 1;
+                } while (posicion < filas - 1);
+                contPasadas = contPasadas + 1;
+            } while (contPasadas < filas -1);
+
+            posicion = 0;
+
+            do
+            {
+                Console.WriteLine("# " + posicion + ": " + palabras[posicion]);
+                posicion = posicion + 1;
+            } while (posicion < filas);
+
+            Console.WriteLine("Press any key");
+            Console.Read();
+
         }
     }
 
