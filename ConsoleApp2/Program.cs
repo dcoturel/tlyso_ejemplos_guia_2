@@ -38,6 +38,9 @@ namespace ConsoleApp2
                 case 9:
                     ejercicio9();
                     break;
+                case 10:
+                    ejercicio10();
+                    break;
             }
         }
 
@@ -628,6 +631,119 @@ namespace ConsoleApp2
             Console.WriteLine("Press any key");
             Console.Read();
 
+        }
+
+        private static void ejercicio10()
+        {
+            const int filas = 1000;
+            const int columnas = 3;
+            const int colCodigo = 0;
+            const int colRazonSocial = 1;
+            const int colDomicilio = 2;
+            String[, ] clientes = new String[filas, columnas];
+            int posicion = 0;
+            int columnaFiltrar = 0;
+            int contPasadas = 0;
+            int contColumnas = 0;
+            String continuar = "";
+            String auxiliar;
+
+            do
+            {
+
+                do
+                {
+                    Console.WriteLine("Ingrese codigo");
+                    clientes[posicion, colCodigo] = Console.ReadLine();
+                    if (clientes[posicion, colCodigo].Equals("")) {
+                        Console.WriteLine("Debe ingresar un valor");
+                    }
+                } while (clientes[posicion, colCodigo].Equals(""));
+
+                do
+                {
+                    Console.WriteLine("Ingrese razon social");
+                    clientes[posicion, colRazonSocial] = Console.ReadLine();
+                    if (clientes[posicion, colRazonSocial].Equals(""))
+                    {
+                        Console.WriteLine("Debe ingresar un valor");
+                    }
+                } while (clientes[posicion, colRazonSocial].Equals(""));
+
+                do
+                {
+                    Console.WriteLine("Ingrese domicilio");
+                    clientes[posicion, colDomicilio] = Console.ReadLine();
+                    if (clientes[posicion, colDomicilio].Equals(""))
+                    {
+                        Console.WriteLine("Debe ingresar un valor");
+                    }
+                } while (clientes[posicion, colDomicilio].Equals(""));
+
+                
+                do
+                {
+                    Console.WriteLine("¿Desea continuar cargando notas? S/N");
+                    continuar = Console.ReadLine().ToUpper();
+                    if (!continuar.Equals("S") && !continuar.Equals("N"))
+                    {
+                        Console.WriteLine("Debe ingresar S o N");
+                    }
+                } while (!continuar.Equals("S") && !continuar.Equals("N"));
+                posicion = posicion + 1;
+            } while (posicion < filas && continuar.Equals("S"));
+
+            do
+            {
+                Console.WriteLine("Ingrese columna por la cual ordenara el listado:");
+                Console.WriteLine("1. Codigo");
+                Console.WriteLine("2. Razon social");
+                Console.WriteLine("3. Domicilio");
+                columnaFiltrar = Convert.ToInt32(Console.ReadLine());
+                if (columnaFiltrar < colCodigo || columnaFiltrar > colDomicilio)
+                {
+                    Console.WriteLine("Debe ingresar un valor entre 1 y 3");
+                }
+            } while (columnaFiltrar < colCodigo || columnaFiltrar > colDomicilio);
+
+            posicion = 0;
+
+            do
+            {
+                posicion = 0;
+                do
+                {
+                    contColumnas = 0;
+                    if (clientes[posicion + 1, columnaFiltrar]!=null)
+                    {
+                        if (String.Compare(clientes[posicion, columnaFiltrar], clientes[posicion + 1, columnaFiltrar], StringComparison.Ordinal) > 0)
+                        {
+                            do
+                            {
+
+                                auxiliar = clientes[posicion, contColumnas];
+                                clientes[posicion, contColumnas] = clientes[posicion + 1, contColumnas];
+                                clientes[posicion + 1, contColumnas] = auxiliar;
+                                contColumnas = contColumnas + 1;
+                            } while (contColumnas < columnas);
+
+                        }
+                    }                    
+                    posicion = posicion + 1;
+                } while (posicion < filas - 1);
+                contPasadas = contPasadas + 1;
+            } while (contPasadas < filas - 1);
+
+            posicion = 0;
+
+            do
+            {
+                Console.WriteLine("# " + posicion + "\t" + clientes[posicion, colCodigo] + "\t" + clientes[posicion, colRazonSocial] + "\t" + clientes[posicion, colDomicilio]);
+                posicion = posicion + 1;
+            } while (posicion < filas -1 && clientes[posicion, colCodigo] != null);
+
+            Console.WriteLine("Press any key");
+            Console.Read();
         }
     }
 
